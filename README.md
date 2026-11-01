@@ -23,16 +23,24 @@
 
 ## التشغيل لأول مرة على جهازك
 
-المطلوب: PHP 8.3 أو أحدث و Composer.
+المطلوب: PHP 8.2 أو أحدث (XAMPP 8.2 شغال)، و Composer، و MySQL.
+
+**قاعدة البيانات MySQL** — لو بتستخدم XAMPP:
+1. افتح XAMPP Control Panel ودوس **Start** جنب **MySQL**.
+2. افتح http://localhost/phpmyadmin واعمل قاعدة بيانات جديدة اسمها `aura_perfume` واختار `utf8mb4_unicode_ci`.
+3. الإعدادات الجاهزة في `.env` هي بتاعة XAMPP (`root` من غير باسورد). لو عندك باسورد حطه في `DB_PASSWORD`.
+
+وبعدين في الـ terminal جوه فولدر المشروع:
 
 ```bash
 composer install
-cp .env.example .env
+copy .env.example .env
 php artisan key:generate
-touch database/database.sqlite
 php artisan migrate --seed
 php artisan serve
 ```
+
+(على ماك أو لينكس استخدم `cp` بدل `copy`.)
 
 افتح الموقع: http://localhost:8000
 ولوحة التحكم: http://localhost:8000/admin
@@ -45,7 +53,15 @@ php artisan serve
 > ⚠️ غير الباسورد قبل ما ترفع الموقع (مثلاً من `php artisan tinker`).
 > الـ seeder بيضيف منتجات وطلبات وعملاء تجريبيين عشان الداشبورد يبان مليان — تقدر تمسحهم من الداشبورد أو تشغل `php artisan migrate:fresh` من غير `--seed`.
 
-لو عايز MySQL بدل SQLite: غير `DB_CONNECTION=mysql` وحط بيانات القاعدة في `.env`.
+إعدادات القاعدة في `.env`:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=aura_perfume
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
 ---
 

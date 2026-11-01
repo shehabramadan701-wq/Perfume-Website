@@ -6,6 +6,8 @@ composer install --no-interaction --prefer-dist
 
 if [ ! -f .env ]; then
     cp .env.example .env
+    # Codespaces has no MySQL server, so use a simple SQLite file there
+    sed -i 's/^DB_CONNECTION=mysql/DB_CONNECTION=sqlite/; s/^DB_DATABASE=.*/# DB_DATABASE=/' .env
     php artisan key:generate
 fi
 
