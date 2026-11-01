@@ -1,0 +1,21 @@
+{
+    "name": "AURA Perfume Store",
+    "image": "mcr.microsoft.com/devcontainers/php:8.3",
+
+    // 1) Runs once when the Codespace is created: installs everything
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+
+    // 2) Runs every time the Codespace starts: starts the website
+    "postStartCommand": "nohup php artisan serve --host=0.0.0.0 --port=8000 > storage/logs/serve.log 2>&1 &",
+
+    "forwardPorts": [8000],
+    "portsAttributes": {
+        "8000": { "label": "AURA Website", "onAutoForward": "openBrowser" }
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": ["bmewburn.vscode-intelephense-client", "onecentlab.laravel-blade-snippets"]
+        }
+    }
+}

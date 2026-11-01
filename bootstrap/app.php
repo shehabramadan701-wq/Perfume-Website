@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust the HTTPS proxy of Codespaces / hosting providers (correct https:// links)
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias(['admin' => \App\Http\Middleware\AdminOnly::class]);
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
 
