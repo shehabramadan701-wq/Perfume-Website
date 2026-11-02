@@ -16,7 +16,8 @@
     const closeAll = () => {
         $$('.drawer, .search-box, .overlay').forEach(el => el.classList.remove('open'));
     };
-    $$('[data-open]').forEach(btn => btn.addEventListener('click', () => {
+    $$('[data-open]').forEach(btn => btn.addEventListener('click', e => {
+        e.preventDefault();
         closeAll();
         $(btn.dataset.open).classList.add('open');
         overlay.classList.add('open');
@@ -25,6 +26,10 @@
     }));
     $$('[data-close], .overlay').forEach(el => el.addEventListener('click', closeAll));
     addEventListener('keydown', e => e.key === 'Escape' && closeAll());
+
+    // After adding / changing an item, the page comes back with the bag open
+    const openCart = () => { $('.cart-drawer').classList.add('open'); overlay.classList.add('open'); };
+    if (document.body.hasAttribute('data-open-cart')) setTimeout(openCart, 150);
 
     /* ---------- Quantity buttons ---------- */
     $$('.qty').forEach(q => {
@@ -67,6 +72,7 @@
     $('.intro-skip', intro).addEventListener('click', finish);
 
     function play() {
+        intro.style.transition = '';
         finished = false;
         timers.forEach(clearTimeout);
         timers = [];
@@ -179,6 +185,7 @@
     });
 
     if (reduced || sessionStorage.getItem('auraIntroSeen')) {
+        intro.style.transition = 'none'; // hide instantly, no fade
         intro.classList.add('done');
         finished = true;
         document.body.classList.remove('no-scroll');

@@ -26,9 +26,20 @@ class ShopTest extends TestCase
     public function test_public_pages_load(): void
     {
         $product = $this->product();
-        foreach (['/', '/collection', '/our-story', '/contact', '/bag', '/perfume/'.$product->slug] as $url) {
+        foreach (['/', '/collection', '/our-story', '/contact', '/perfume/'.$product->slug] as $url) {
             $this->get($url)->assertOk();
         }
+    }
+
+    public function test_bag_opens_as_side_panel(): void
+    {
+        $product = $this->product(['name' => 'Panel Oud']);
+
+        $this->from('/collection')->post(route('cart.add', $product))
+            ->assertRedirect('/collection')->assertSessionHas('open_cart', true);
+
+        $this->get('/collection')->assertOk()->assertSee('cart-drawer', false)->assertSee('Panel Oud')->assertSee('data-open-cart', false);
+        $this->from('/contact')->get('/bag')->assertRedirect('/contact');
     }
 
     public function test_cash_on_delivery_checkout_creates_customer_and_order(): void

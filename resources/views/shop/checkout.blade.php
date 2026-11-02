@@ -4,7 +4,7 @@
 @section('content')
 <section class="page-hero">
     <div class="container">
-        <div class="breadcrumbs"><a href="{{ route('cart') }}">Bag</a> / Checkout</div>
+        <div class="breadcrumbs"><a href="#" data-open=".cart-drawer">Bag</a> / Checkout</div>
         <h1 class="section-title">Checkout</h1>
     </div>
 </section>

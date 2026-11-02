@@ -120,7 +120,7 @@ DB_PASSWORD=
 | الألوان والخطوط | أول الملف `public/css/shop.css` (المتغيرات في `:root`) |
 | ألوان الداشبورد | `public/css/admin.css` |
 | نصوص الصفحة الرئيسية | `resources/views/shop/home.blade.php` |
-| الهيدر والفوتر | `resources/views/layouts/shop.blade.php` |
+| الهيدر والفوتر وشنطة المشتريات (Bag) اللي بتطلع من الجنب | `resources/views/layouts/shop.blade.php` |
 | صفحة Our Story | `resources/views/shop/story.blade.php` |
 | صورة الـ Hero | `public/images/hero-bottle.webp` |
 | اسم المحل، العملة، الشحن، التليفون | `.env` (متغيرات `SHOP_...`) |
