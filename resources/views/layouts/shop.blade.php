@@ -124,6 +124,6 @@
     </a>
 @endif
 
-<script src="{{ asset('js/shop.js') }}?v=1"></script>
+<script src="{{ asset('js/shop.js') }}?v=2"></script>
 </body>
 </html>

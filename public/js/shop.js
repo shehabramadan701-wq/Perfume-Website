@@ -173,9 +173,15 @@
     // "Play Atmosphere" button replays the intro
     $$('[data-replay-intro]').forEach(b => b.addEventListener('click', play));
 
+    // Coming back from another page (Back button restores the page from cache)
+    addEventListener('pageshow', e => {
+        if (e.persisted && finished) { document.body.classList.remove('no-scroll'); ready(); }
+    });
+
     if (reduced || sessionStorage.getItem('auraIntroSeen')) {
         intro.classList.add('done');
         finished = true;
+        document.body.classList.remove('no-scroll');
         ready();
     } else {
         play();

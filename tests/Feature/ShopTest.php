@@ -137,4 +137,23 @@ class ShopTest extends TestCase
 
         $this->assertDatabaseHas('products', ['name' => 'Velvet Musk', 'slug' => 'velvet-musk', 'is_active' => true]);
     }
+
+    public function test_accounting_totals_split_card_and_cash(): void
+    {
+        $admin = User::create(['name' => 'Admin', 'email' => 'ad@ad.com', 'password' => 'x', 'is_admin' => true]);
+        $customer = \App\Models\Customer::create(['name' => 'A', 'email' => 'a@a.com']);
+        foreach (['stripe' => 1000, 'paymob' => 500, 'cod' => 200] as $method => $total) {
+            Order::create([
+                'customer_id' => $customer->id, 'name' => 'A', 'email' => 'a@a.com', 'phone' => '1', 'city' => 'C', 'address' => 'X',
+                'subtotal' => $total, 'shipping' => 0, 'total' => $total, 'payment_method' => $method,
+                'payment_status' => 'paid', 'paid_at' => now(),
+            ]);
+        }
+
+        $summary = $this->actingAs($admin)->get('/admin/accounting')->assertOk()->viewData('summary');
+
+        $this->assertEquals(1700, $summary['income']);
+        $this->assertEquals(1500, $summary['card']);
+        $this->assertEquals(200, $summary['cash']);
+    }
 }

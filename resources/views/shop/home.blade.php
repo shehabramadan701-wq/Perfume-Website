@@ -1,7 +1,5 @@
 @extends('layouts.shop')
 
-@section('body-class', 'no-scroll')
-
 {{-- ============ INTRO: the perfume falls from the sky ============ --}}
 @section('intro')
 <div id="intro" aria-hidden="true">

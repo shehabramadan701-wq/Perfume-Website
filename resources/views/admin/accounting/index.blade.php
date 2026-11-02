@@ -26,7 +26,7 @@
     <div class="card stat"><div class="top">Net profit</div><div class="value" style="color: {{ $summary['net'] >= 0 ? 'var(--good)' : 'var(--bad)' }}">{{ number_format($summary['net'], 2) }}</div><div class="hint">Income − expenses ({{ number_format($summary['expenses'], 2) }})</div></div>
 </div>
 
-<div class="grid g-main mb">
+<div class="grid g-acc mb">
     <div class="card">
         <div class="card-head">
             <h3>Transactions</h3>
@@ -61,8 +61,8 @@
         {{ $transactions->links() }}
     </div>
 
-    <div>
-        <div class="card mb">
+    <div class="acc-side">
+        <div class="card">
             <div class="card-head"><h3>Income by method</h3></div>
             @php $sum = max(1, $byMethod->sum('total')); @endphp
             <div class="seg-bar" role="img" aria-label="Share of income by payment method">

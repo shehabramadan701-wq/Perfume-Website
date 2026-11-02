@@ -26,7 +26,7 @@ class AccountingController extends Controller
 
         $summary = [
             'income' => $income,
-            'card' => (float) $byMethod->only(['stripe', 'paymob'])->sum('total'),
+            'card' => (float) (($byMethod['stripe']->total ?? 0) + ($byMethod['paymob']->total ?? 0)),
             'cash' => (float) ($byMethod['cod']->total ?? 0),
             'shipping' => $shippingIncome,
             'expenses' => $expenseTotal,

@@ -18,7 +18,7 @@
     <title>@yield('title', 'Dashboard') — {{ config('shop.name') }} Admin</title>
     <link rel="icon" href="{{ asset('images/perfume-1.webp') }}">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=3">
 </head>
 <body>
 <div class="app">
@@ -35,16 +35,6 @@
             @endforeach
         </nav>
 
-        <div class="side-label">Store</div>
-        <nav class="side-nav">
-            <a href="{{ route('home') }}" target="_blank"><svg class="icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg> View website</a>
-        </nav>
-
-        <div class="side-foot">
-            <strong>Add a new perfume</strong>
-            <p>Upload a photo and publish it to your store in seconds.</p>
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">+ New product</a>
-        </div>
     </aside>
 
     <div class="main">
